@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チョロギ（宝塔菜）の原材料供給に関する戦略的協力のご提案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: 提案内容をより直感的かつ説得力をもって伝えるため、スライド形式から脱却し、テーマ別のセクショニングを導入したSPAを設計しました。ユーザー（日本東泉の担当者）がスクロールすることで物語のように提案を追える構成です。1)ヒーローセクションで結論を提示、2)「新旧モデル比較」でメリットを視覚化、3)「慶陽の強み」をインタラクティブなタブで深掘り、4)「コスト優位性」をグラフで証明、5)「次のステップ」で行動を促す、というユーザーフローを設計。この構造は、静的な文書を読むよりもエンゲージメントを高め、提案の重要ポイントを記憶に残りやすくすることを目的としています。 -->
+    <!-- Visualization & Content Choices: 1) 協力モデル: Goal=比較、Method=HTML/Tailwindによる2カラムレイアウト、Interaction=なし（静的比較）、Justification=新旧モデルの差を明確に並置し、新提案の優位性を一目で理解させるため。2) 慶陽産チョロギ（宝塔菜）の品質要因: Goal=整理・詳細化、Method=JSによるタブ切り替え、Interaction=タブクリックで情報表示切替、Justification=土壌・気候・生態系という3つの主要因を整理し、ユーザーが能動的に情報を選択できるようにすることで、複雑な内容を簡潔に見せるため。3) コスト優位性: Goal=比較・証明、Method=Chart.jsによる棒グラフ、Interaction=ホバーで詳細表示、Justification=仲介業者を介した場合とのコスト差を定量的に視覚化し、「圧倒的なコスト優位性」という主張に客観的な説得力を持たせるため。Library=Chart.js(Canvas)。 -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FDFCFB;
+            color: #333;
+        }
+        .active-tab {
+            border-bottom: 2px solid #047857;
+            color: #047857;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-emerald-800">戦略的協力のご提案</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-600 hover:text-emerald-700">提案概要</a>
+                <a href="#model" class="text-gray-600 hover:text-emerald-700">協力モデル</a>
+                <a href="#quality" class="text-gray-600 hover:text-emerald-700">慶陽の強み</a>
+                <a href="#benefits" class="text-gray-600 hover:text-emerald-700">メリット</a>
+                <a href="#next-steps" class="text-gray-600 hover:text-emerald-700">次のステップ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="overview" class="py-20 bg-emerald-50">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-sm font-semibold text-emerald-700 uppercase tracking-wider">株式会社 日本東泉</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mt-4">チョロギ（宝塔菜）の供給における、<br class="hidden md:inline">新たな戦略的パートナーシップのご提案</h1>
+                <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">貴社の中国国内工場を活用し、原材料調達から加工・輸出まで一貫した高品質・高効率サプライチェーンを共同で構築しませんか。これは単なる取引ではなく、共に市場をリードするための戦略的提携です。</p>
+            </div>
+        </section>
+
+        <section id="model" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">協力モデルの再定義</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">外部パートナーを探すのではなく、貴社の既存資産を最大限に活用することで、サプライチェーンを最適化し、これまでにない価値を創出します。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
+                    <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-gray-500 mb-4">現状のモデル</h3>
+                        <p class="text-gray-600">弊社は原材料を供給し、加工・輸出は外部のパートナーに委託。このプロセスには、コミュニケーションコスト、中間マージン、品質管理の複雑さが伴います。</p>
+                        <ul class="mt-4 space-y-2 text-sm text-gray-500">
+                            <li><span>-</span> サプライチェーンが長い</li>
+                            <li><span>-</span> 中間コストが発生</li>
+                            <li><span>-</span> 品質管理の分断</li>
+                        </ul>
+                    </div>
+                    <div class="bg-emerald-600 text-white p-8 rounded-lg shadow-xl border border-emerald-700">
+                        <h3 class="text-xl font-bold mb-4">新しい戦略的モデル</h3>
+                        <p>弊社が慶陽産チョロギ（宝塔菜）の専属サプライヤーとなり、貴社の中国工場が漬物・加工・輸出を担当。サプライチェーンを劇的に短縮し、コストを削減、そして貴社による完全な品質管理を実現します。</p>
+                        <ul class="mt-4 space-y-2 text-sm font-semibold">
+                            <li><span>+</span> サプライチェーンを短縮</li>
+                            <li><span>+</span> 中間マージンを削減</li>
+                            <li><span>+</span> 一貫した品質管理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quality" class="py-20 bg-stone-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">慶陽産チョロギ（宝塔菜）の卓越した品質</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">なぜ慶陽なのか？その答えは、他にはない恵まれた自然環境にあります。最高品質のチョロギ（宝塔菜）が育つ理由をぜひご覧ください。</p>
+                </div>
+                <img src="https://stat.ameba.jp/user_images/20140929/14/senyoltd0317/0d/a6/j/o0352046913081983512.jpg?caw=1125"
+                     alt="チョロギ（宝塔菜）の写真"
+                     class="w-1/2 md:w-1/4 mx-auto rounded-lg shadow-lg mb-8"
+                     onerror="this.src='https://placehold.co/300x200/D4E0D1/333333?text=チョロギ（宝塔菜）写真';">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex border-b border-gray-300">
+                        <button class="tab-button flex-1 py-4 px-2 text-center text-gray-500 transition active-tab" data-tab="soil">独特の土壌</button>
+                        <button class="tab-button flex-1 py-4 px-2 text-center text-gray-500 transition" data-tab="climate">理想的な気候</button>
+                        <button class="tab-button flex-1 py-4 px-2 text-center text-gray-500 transition" data-tab="ecology">天然の生態系</button>
+                    </div>
+                    <div id="soil" class="tab-content mt-8 active">
+                        <h3 class="text-xl font-bold text-emerald-800 mb-4">恵みの土壌：黄綿土</h3>
+                        <p class="text-gray-700 leading-relaxed">慶陽市の土壌は、ミネラルと微量元素が豊富な「黄綿土」。質感が柔らかく通気性に優れ、根菜類の生育に最適です。この土壌が、ふっくらと形の良い、宝塔のようなチョロギ（宝塔菜）の地下茎を育みます。</p>
+                    </div>
+                    <div id="climate" class="tab-content mt-8">
+                        <h3 class="text-xl font-bold text-emerald-800 mb-4">最適な気候：大きな寒暖差と長い日照</h3>
+                        <p class="text-gray-700 leading-relaxed">昼夜の大きな温度差は、日中に蓄えた栄養分を夜間にしっかり保持させ、食感と品質を向上させます。また、長い日照時間は光合成を促進し、成長に十分なエネルギーを供給します。適切な降水量も病害虫を防ぎます。</p>
+                    </div>
+                    <div id="ecology" class="tab-content mt-8">
+                        <h3 class="text-xl font-bold text-emerald-800 mb-4">天然のバリア：子午嶺山脈</h3>
+                        <p class="text-gray-700 leading-relaxed">鬱蒼と茂る子午嶺山脈が「天然の貯水池」となり、病害虫の発生を自然に抑制します。これにより、農薬の使用を大幅に削減でき、貴社の厳しい食品安全基準を満たす、より健康的なチョロギ（宝塔菜）の生産が可能です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">安定供給と圧倒的なコスト優位性</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">原産地のサプライヤーとして直接供給することで、トレーサビリティを確保し、中間コストを排除。貴社の製品に強力な価格競争力をもたらします。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                    <div>
+                        <h3 class="text-xl font-bold text-emerald-800 mb-4">直接供給によるコスト削減効果</h3>
+                        <p class="text-gray-600 mb-6">複数の仲介業者を介する従来モデルと比較して、弊社の直接供給モデルは調達コストを大幅に削減します。このコスト優位性は、貴社の利益率向上に直接貢献します。</p>
+                        <div class="space-y-4">
+                            <div class="bg-stone-100 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700">安定供給と追跡可能性</h4>
+                                <p class="text-sm text-gray-600">栽培基地から直接供給するため、供給は安定的で、生産履歴の追跡も可能です。</p>
+                            </div>
+                            <div class="bg-stone-100 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700">品質へのコミットメント</h4>
+                                <p class="text-sm text-gray-600">長期的なパートナーとして、貴社の基準を満たす最高品質の原材料を供給し続けることをお約束します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-steps" class="py-20 bg-emerald-800 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold">長期的なWin-Winの関係構築へ</h2>
+                <p class="mt-4 max-w-2xl mx-auto opacity-90">この提案が、両社にとって大きな飛躍の始まりとなることを確信しております。ビジョンを現実のものとするため、次のステップをご提案させてください。</p>
+                <div class="flex flex-col md:flex-row justify-center gap-6 mt-12 max-w-4xl mx-auto">
+                    <div class="bg-white/10 p-6 rounded-lg text-left flex-1">
+                        <div class="text-3xl font-bold text-emerald-300 mb-2">1.</div>
+                        <h3 class="text-lg font-semibold mb-2">詳細協議</h3>
+                        <p class="opacity-80 text-sm">オンラインまたは対面にて、本協力モデルの詳細について協議の機会をいただきたく存じます。</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-lg text-left flex-1">
+                        <div class="text-3xl font-bold text-emerald-300 mb-2">2.</div>
+                        <h3 class="text-lg font-semibold mb-2">産地視察</h3>
+                        <p class="opacity-80 text-sm">貴社チームに慶陽の栽培基地をご視察いただき、チョロギ（宝塔菜）の卓越した品質を直接お確かめください。</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-lg text-left flex-1">
+                        <div class="text-3xl font-bold text-emerald-300 mb-2">3.</div>
+                        <h3 class="text-lg font-semibold mb-2">計画策定</h3>
+                        <p class="opacity-80 text-sm">貴社中国工場と弊社との間で、具体的な直接供給ルートを確立するための計画を共同で策定します。</p>
+                    </div>
+                </div>
+                 <p class="mt-12 text-lg">貴社からの前向きなご返信を心よりお待ちしております。</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+             <h4 class="text-lg font-bold">お問い合わせ</h4>
+             <p class="mt-2"></p>
+             <p>メール: zhulonglong123@outlook.com, moemoe1718@hotmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active-tab'));
+                    tab.classList.add('active-tab');
+
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+            
+            const costChartCtx = document.getElementById('costChart').getContext('2d');
+            new Chart(costChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['従来モデル (仲介業者あり)', '新提案モデル (直接供給)'],
+                    datasets: [{
+                        label: '相対的調達コスト',
+                        data: [100, 65],
+                        backgroundColor: [
+                            'rgba(110, 110, 110, 0.6)',
+                            'rgba(5, 150, 105, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(110, 110, 110, 1)',
+                            'rgba(5, 150, 105, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                           beginAtZero: true,
+                           ticks: {
+                               callback: function(value) {
+                                   return value + '%'
+                               }
+                           }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
